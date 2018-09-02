@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>morph-tabbar test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../morph-tabbar.html">
+    <link rel="import" href="../../morph-tabbar-item/morph-tabbar-item.html">
+  </head>
+  <body>
+    <test-fixture id="BasicAndroidFixture">
+      <template>
+        <morph-tabbar platform="android" selected="play">
+          <morph-tabbar-item platform="android" name="play" not-selected-image="../img/play_android.svg" selected-image="../img/play_android_selected.svg" selected></morph-tabbar-item>
+          <morph-tabbar-item platform="android" name="favorite" not-selected-image="../img/favorite_android.svg" selected-image="../img/favorite_android_selected.svg"></morph-tabbar-item>
+          <morph-tabbar-item platform="android" name="mic" not-selected-image="../img/mic_android.svg" selected-image="../img/mic_android_selected.svg"></morph-tabbar-item>
+        </morph-tabbar>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="BasicIosFixture">
+      <template>
+        <morph-tabbar platform="ios" selected="play">
+          <morph-tabbar-item platform="ios" name="play" not-selected-image="../img/play_ios.svg" selected-image="../img/play_ios_selected.svg"></morph-tabbar-item>
+          <morph-tabbar-item platform="ios" name="favorite" not-selected-image="../img/favorite_ios.svg" selected-image="../img/favorite_ios_selected.svg"></morph-tabbar-item>
+          <morph-tabbar-item platform="ios" name="mic" not-selected-image="../img/mic_ios.svg" selected-image="../img/mic_ios_selected.svg"></morph-tabbar-item>
+        </morph-tabbar>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="LabeledAndroidFixture">
+      <template>
+        <morph-tabbar platform="android" selected="play" label>
+          <morph-tabbar-item platform="android" name="play" not-selected-image="../img/play_android.svg" selected-image="../img/play_android_selected.svg" selected label></morph-tabbar-item>
+          <morph-tabbar-item platform="android" name="favorite" not-selected-image="../img/favorite_android.svg" selected-image="../img/favorite_android_selected.svg" label></morph-tabbar-item>
+          <morph-tabbar-item platform="android" name="mic" not-selected-image="../img/mic_android.svg" selected-image="../img/mic_android_selected.svg" label></morph-tabbar-item>
+        </morph-tabbar>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="LabeledIosFixture">
+      <template>
+        <morph-tabbar platform="ios" selected="play" label>
+          <morph-tabbar-item platform="ios" name="play" not-selected-image="../img/play_ios.svg" selected-image="../img/play_ios_selected.svg" label></morph-tabbar-item>
+          <morph-tabbar-item platform="ios" name="favorite" not-selected-image="../img/favorite_ios.svg" selected-image="../img/favorite_ios_selected.svg" label></morph-tabbar-item>
+          <morph-tabbar-item platform="ios" name="mic" not-selected-image="../img/mic_ios.svg" selected-image="../img/mic_ios_selected.svg" label></morph-tabbar-item>
+        </morph-tabbar>
+      </template>
+    </test-fixture>
+
+    <script>
+      //check tabbar length is same with the root tabbar-item element length.
+
+      describe('morph-tabbar', function() {
+        var promise;
+        // testing default Android Tabbar properties
+        context('Android Default Tabbar', function() {
+          // declare variable for bar in this context only
+          let bar, items, style;
+          const androidHeight = "48px";
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            bar = fixture('BasicAndroidFixture');
+            items = bar.querySelectorAll('morph-tabbar-item');
+            style = getComputedStyle(bar);
+
+          });
+
+          it('instantiating the tabbar on android platform with default properties works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(bar.platform).to.be.equal('android');
+            expect(bar.hasAttribute('selected')).to.be.true;
+            expect(bar.hasAttribute('label')).to.be.false;
+            expect(bar.tabbarItems).to.be.an('Array');
+            expect(style.height).to.be.equal(androidHeight);
+          });
+
+          it('checking if the tabbar property gets updated works', function() {
+            expect(bar.tabbarItems.length).to.be.equal(items.length);
+          });
+
+          it('Inner item selection works', function() {
+            // testing for default innerItemClickHandler on android item
+            var inner = sinon.spy(bar, 'innerItemClickHandler');
+            items[1].click();
+
+            expect(inner.callCount).to.be.equal(1);
+            inner.restore();
+          });
+
+          it('Selected attribute is set on the tabbar item by default when selected set on tabbar', function () {
+            var inner = sinon.spy(bar, 'innerItemClickHandler');
+            
+            expect(items[0].selected).to.be.true;
+          });
+
+          it('Selected attribute gets updated after the click works', function() {
+            var inner = sinon.spy(bar, 'innerItemClickHandler');
+            items[1].click();
+
+            expect(items[1].selected).to.be.true;
+            expect(items[0].selected).to.be.false;
+          });
+
+          it('checking the selected value of tabbar is the same with name of the selected item works ', function() {
+            items[1].click();
+
+            // testing for selected value data binding
+            var barSelectedValue, itemSelectedName;
+            barSelectedValue = bar.selected;
+            for (var i=0; i<items.length; i++) {
+              if (items[i].hasAttribute('selected')) {
+                itemSelectedName = items[i].name;
+                return;
+              }
+            }
+            expect(barSelectedValue).to.be.equal(itemSelectedName);
+          });
+        });
+
+        // testing default IOS Tabbar properties
+        context('Ios Default Tabbar', function() {
+          // declare variable for bar in this context only
+          let bar, items, style;
+          const iosHeight =  '44px';
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            bar = fixture('BasicIosFixture');
+            items = bar.querySelectorAll('morph-tabbar-item');
+            style = getComputedStyle(bar);
+          });
+
+          it('instantiating the tabbar on ios platform with default properties works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(bar.platform).to.be.equal('ios');
+            expect(bar.hasAttribute('selected')).to.be.true;
+            expect(bar.hasAttribute('label')).to.be.false;
+            expect(bar.tabbarItems).to.be.an('Array');
+            expect(style.height).to.be.equal(iosHeight);
+          });
+
+          it('checking if the tabbarItems property gets updated works', function() {
+            expect(bar.tabbarItems.length).to.be.equal(items.length);
+          });
+
+          it('Inner item selection works', function() {
+            // testing for default innerItemClickHandler on ios item
+            var inner = sinon.spy(bar, 'innerItemClickHandler');
+            items[1].click();
+
+            expect(inner.callCount).to.be.equal(1);
+            inner.restore();
+          });
+
+          it('Selected attribute gets updated after the click works', function() {
+            var inner = sinon.spy(bar, 'innerItemClickHandler');
+            items[1].click();
+
+            expect(items[1].selected).to.be.true;
+            expect(items[0].selected).to.be.false;
+          })
+
+          it('checking the selected value of tabbar is same with the name of the selected item works ', function() {
+            items[1].click();
+
+            // testing for selected value data binding
+            var barSelectedValue, itemSelectedName;
+            barSelectedValue = bar.selected;
+
+            for (var i=0; i<items.length; i++) {
+              if (items[i].hasAttribute('selected')) {
+                itemSelectedName = items[i].name;
+                return;
+              }
+            }
+            expect(barSelectedValue).to.be.equal(itemSelectedName);
+          });
+        });
+
+        // testing Android Tabbar labeled properties
+        context('Android Labeled Tabbar', function() {
+          // declare variable for bar in this context only
+          let bar, items, style;
+          const androidLabelHeight = '72px';
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            bar = fixture('LabeledAndroidFixture');
+            items = bar.querySelectorAll('morph-tabbar-item');
+            style = getComputedStyle(bar);
+          });
+
+          it('instantiating the tabbar on android platform with labeled properties works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(bar.platform).to.be.equal('android');
+            expect(bar.hasAttribute('label')).to.be.true;
+            expect(bar.label).to.be.true;
+          });
+
+          it('checks the tabbar on android platform with labeled styling works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(style.height).to.be.equal(androidLabelHeight);
+          });
+        });
+
+        // testing Ios Tabbar labeled properties
+        context('Ios Labeled Tabbar', function() {
+          // declare variable for bar in this context only
+          let bar, items, style;
+          const iosLabelHeight = '50px';
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            bar = fixture('LabeledIosFixture');
+            items = bar.querySelectorAll('morph-tabbar-item');
+            style = getComputedStyle(bar);
+          });
+
+          it('instantiating the tabbar on ios platform with labeled properties works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(bar.platform).to.be.equal('ios');
+            expect(bar.hasAttribute('label')).to.be.true;
+            expect(bar.label).to.be.true;
+          });
+
+          it('checks the tabbar on ios platform with labeled styling works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(style.height).to.be.equal(iosLabelHeight);
+          });
+        });
+      })
+    </script>
+
+  </body>
+</html>

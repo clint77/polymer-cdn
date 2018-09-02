@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>morph-tabbar-item test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="/bower_components/morph-ripple/morph-ripple.html">
+    <link rel="import" href="../morph-tabbar-item.html">
+  </head>
+  <body>
+
+    <test-fixture id="BasicAndroidFixture">
+      <template>
+        <morph-tabbar-item platform="android" name="favorite" not-selected-image="../img/icon.svg" selected-image="../img/icon_selected.svg"></morph-tabbar-item>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AndroidFixtureLabel">
+      <template>
+        <morph-tabbar-item platform="android" name="favorite" not-selected-image="../img/icon.svg" selected-image="../img/icon_selected.svg" label></morph-tabbar-item>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="BasicIosFixture">
+      <template>
+        <morph-tabbar-item platform="ios" name="favorite" not-selected-image="../img/icon.svg" selected-image="../img/icon_selected.svg"></morph-tabbar-item>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="IosFixtureLabel">
+      <template>
+        <morph-tabbar-item platform="ios" name="favorite" not-selected-image="../img/icon.svg" selected-image="../img/icon_selected.svg" label></morph-tabbar-item>
+      </template>
+    </test-fixture>
+
+
+    <script>
+      describe('morph-tabbar-item', function() {
+
+        // testing default Android Tabbar Item properties
+        context('Android Default Tabbar Item', function() {
+          // declare variable for item in this context only
+          let item, label, style, ripple, rippleStyle;
+
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            item = fixture('BasicAndroidFixture');
+            label = item.root.querySelector('.label');
+            style = getComputedStyle(label);
+
+            ripple = item.root.querySelector('morph-ripple');
+            rippleStyle = getComputedStyle(ripple);
+          });
+
+          it('instantiating the item on android platform with default properties works', function() {
+            // testing for default colors and which platform was set in html markup
+            expect(item.platform).to.be.equal('android');
+            expect(item.hasAttribute('selected-image')).to.be.true
+            expect(item.hasAttribute('not-selected-image')).to.be.true;
+          });
+
+          it('checking the item display style on android platform works', function() {
+            // checks if the label is shown or not
+            expect(style.display).to.be.equal("none");
+          });
+
+          it('checking <morph-ripple> display on android works ', function () {
+            expect(rippleStyle.display).to.be.equal('block');
+          });
+        });
+        // testing default Android Tabbar Item properties
+        context('Android Default Tabbar Item with label', function() {
+          // declare variable for item in this context only
+          let item, label, style, ripple, rippleStyle;
+
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            item = fixture('AndroidFixtureLabel');
+            label = item.root.querySelector('.label');
+            style = getComputedStyle(label);
+
+            ripple = item.root.querySelector('morph-ripple');
+            rippleStyle = getComputedStyle(ripple);
+          });
+
+          it('instantiating the item with label on android platform with label properties works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(item.platform).to.be.equal('android');
+            expect(item.hasAttribute('selected-image')).to.be.true
+            expect(item.hasAttribute('not-selected-image')).to.be.true;
+            expect(item.hasAttribute('label')).to.be.true;
+            expect(item.hasAttribute('name')).to.be.true;
+          });
+
+          it('checking the item display style on android platform works', function() {
+            // checks if the label is shown or not
+            expect(style.display).to.be.equal("block");
+          });
+
+          it('checking <morph-ripple> display on android works ', function () {
+            expect(rippleStyle.display).to.be.equal('block');
+          });
+
+        });
+
+        // testing default Ios Tabbar Item properties
+        context('Ios Default Tabbar Item', function() {
+          // declare variable for item in this context only
+          let item, label, style, ripple, rippleStyle;
+
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            item = fixture('BasicIosFixture');
+            label = item.root.querySelector('.label');
+            style = getComputedStyle(label);
+
+            ripple = item.root.querySelector('morph-ripple');
+            rippleStyle = getComputedStyle(ripple);
+          });
+
+          it('instantiating the item on ios platform with default properties works', function() {
+            // testing for default properties and which platform was set in html markup
+            expect(item.platform).to.be.equal('ios');
+            expect(item.hasAttribute('selected-image')).to.be.true
+            expect(item.hasAttribute('not-selected-image')).to.be.true;
+          });
+
+          it('checking the item display style on ios platform works', function() {
+            // checks if the label is shown or not
+            expect(style.display).to.be.equal("none");
+          });
+
+          it('checking <morph-ripple> display being none on ios works ', function () {
+            expect(rippleStyle.display).to.be.equal('none');
+          });
+
+        });
+
+        // testing Ios Tabbar Item with Label properties
+        context('Ios Default Tabbar Item with label', function() {
+          // declare variable for item in this context only
+          let item, label, style, ripple, rippleStyle;
+
+          // Create a test fixture
+          beforeEach(function() {
+            // assigning item fixture for this context. This will automatically removed on the teardown phase of this test context
+            item = fixture('IosFixtureLabel');
+            label = item.root.querySelector('.label');
+            style = getComputedStyle(label);
+
+            ripple = item.root.querySelector('morph-ripple');
+            rippleStyle = getComputedStyle(ripple);
+          });
+
+
+          it('instantiating the item on ios platform with label properties works', function() {
+            // testing for properties and which platform was set in html markup
+            expect(item.platform).to.be.equal('ios');
+            expect(item.hasAttribute('selected-image')).to.be.true
+            expect(item.hasAttribute('not-selected-image')).to.be.true;
+            expect(item.hasAttribute('label')).to.be.true;
+            expect(item.hasAttribute('name')).to.be.true;
+          });
+
+          it('checking the item display style on ios platform works', function() {
+            // checks if the label is shown or not
+            expect(style.display).to.be.equal("block");
+          });
+
+          it('checking <morph-ripple> display being none on ios works ', function () {
+            expect(rippleStyle.display).to.be.equal('none');
+          });
+        });
+      })
+    </script>
+
+  </body>
+</html>

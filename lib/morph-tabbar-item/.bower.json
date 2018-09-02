@@ -1,0 +1,30 @@
+{
+  "name": "morph-tabbar-item",
+  "description": "Tab bar item for polymorph components",
+  "main": "morph-tabbar-item.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "morph-element": "https://github.com/nexpaq/morph-element.git#master",
+    "morph-shared-colors": "https://github.com/moduware/morph-shared-colors.git#master",
+    "morph-ripple": "https://github.com/moduware/morph-ripple.git#master",
+    "morph-shared-styles": "https://github.com/moduware/morph-shared-styles.git#^0.0.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/moduware/morph-tabbar-item",
+  "_release": "877af6dcd0",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "877af6dcd0f2598f792229b89c3985de29458c6b"
+  },
+  "_source": "https://github.com/moduware/morph-tabbar-item.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/moduware/morph-tabbar-item.git"
+}

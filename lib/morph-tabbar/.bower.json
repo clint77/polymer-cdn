@@ -1,0 +1,29 @@
+{
+  "name": "morph-tabbar",
+  "description": "Navigation bar for polymorph components",
+  "main": "morph-tabbar.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "morph-element": "https://github.com/nexpaq/morph-element.git#master",
+    "morph-tabbar-item": "https://github.com/moduware/morph-tabbar-item.git#master"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/moduware/morph-tabbar",
+  "_release": "9cd76371a2",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9cd76371a27fbd7d2ef75fc74256982401bffecc"
+  },
+  "_source": "https://github.com/moduware/morph-tabbar.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/moduware/morph-tabbar.git",
+  "_direct": true
+}
