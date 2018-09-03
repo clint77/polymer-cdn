@@ -18,14 +18,13 @@
     "polymer": "^2.0.0"
   },
   "homepage": "https://github.com/moduware/morph-tabbar-item",
-  "_release": "624f1630b8",
+  "_release": "db46ef5338",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "624f1630b8e5d2f9358a15ebaee4602cce5045c1"
+    "commit": "db46ef53380124ebbceea47b38a9354c75af5dd6"
   },
   "_source": "https://github.com/moduware/morph-tabbar-item.git",
   "_target": "master",
-  "_originalSource": "https://github.com/moduware/morph-tabbar-item.git",
-  "_direct": true
+  "_originalSource": "https://github.com/moduware/morph-tabbar-item.git"
 }

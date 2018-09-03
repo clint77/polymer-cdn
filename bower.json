@@ -112,6 +112,7 @@
     "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master",
     "morph-tabbar-item": "https://github.com/moduware/morph-tabbar-item.git#master",
     "morph-button": "https://github.com/moduware/morph-button.git#master",
-    "morph-list-view": "https://github.com/moduware/morph-list-view.git#master"
+    "morph-list-view": "https://github.com/moduware/morph-list-view.git#master",
+    "morph-list-view-item": "https://github.com/moduware/morph-list-view-item.git#master"
   }
 }
