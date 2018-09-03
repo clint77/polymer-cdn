@@ -109,6 +109,7 @@
     "prism-element": "PolymerElements/prism-element#^2.0.1",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.20",
     "web-component-tester": "^6.4.1",
-    "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master"
+    "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master",
+    "morph-tabbar-item": "https://github.com/moduware/morph-tabbar-item.git#master"
   }
 }
