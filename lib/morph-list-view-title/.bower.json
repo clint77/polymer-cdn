@@ -1,0 +1,28 @@
+{
+  "name": "morph-list-view-title",
+  "main": "morph-list-view-title.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "morph-element": "https://github.com/moduware/morph-element.git#master",
+    "morph-shared-styles": "https://github.com/moduware/morph-shared-styles.git#^0.0.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/moduware/morph-list-view-title",
+  "_release": "f28c4e004b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f28c4e004b294e125a6e3ac463aa8d438e4d86c5"
+  },
+  "_source": "https://github.com/moduware/morph-list-view-title.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/moduware/morph-list-view-title.git",
+  "_direct": true
+}

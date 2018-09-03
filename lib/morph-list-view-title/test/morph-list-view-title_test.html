@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>morph-list-view-title test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../morph-list-view-title.html">
+  </head>
+  <body>
+
+    <test-fixture id="IosTestFixture">
+      <template>
+        <morph-list-view-title platform="ios">My Title</morph-list-view-title>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AndroidTestFixture">
+      <template>
+        <morph-list-view-title platform="android">My Title</morph-list-view-title>
+      </template>
+    </test-fixture>
+
+    <script>
+      describe('morph-list-view-title', () => {
+
+        context('on IOS platform', () => {
+
+          let element, elementShadowRoot, slotElementStyles;
+
+          beforeEach(function() {
+            element = fixture('IosTestFixture');
+            elementShadowRoot = element.shadowRoot;
+            slotElementStyles = window.getComputedStyle(element);
+          });
+
+          
+
+          it('Should have the right text', () => {
+            const slots = elementShadowRoot.querySelectorAll("slot");
+            const mainSlotTextContent = slots[0].assignedNodes()[0].textContent;
+            
+            expect(mainSlotTextContent).to.equal('My Title');
+          });
+
+          it('Should have correct main-text font color for IOS platform', () => {
+            const iosTitleFontColor = slotElementStyles.getPropertyValue('color');
+
+            expect(iosTitleFontColor).to.equal('rgb(109, 109, 114)');
+          });
+
+          it('Should have text-transform uppercase', () => {   
+            const iosTitleTextTransform = slotElementStyles.getPropertyValue('text-transform');
+
+            expect(iosTitleTextTransform).to.equal('uppercase');
+          });
+
+          it('Should have correct main-text line-height for IOS platform', () => {
+            const iosTitleLineHeight = slotElementStyles.getPropertyValue('line-height');
+
+            expect(iosTitleLineHeight).to.equal('17px');
+          });
+
+          it('Should have margin margin: 32px 16px 16px;', () => {
+            const expectedMarginTop = slotElementStyles.getPropertyValue('margin-top');
+            const expectedMarginBottom = slotElementStyles.getPropertyValue('margin-bottom');
+
+            expect(expectedMarginTop).to.equal('35px');
+            expect(expectedMarginBottom).to.equal('10px');
+          });
+
+        });
+
+
+        context('on Android platform', () => {
+          let element, slotElementStyles;
+
+          beforeEach(() => {
+            element = fixture('AndroidTestFixture');
+            slotElementStyles = window.getComputedStyle(element);
+          });
+
+          it('Should have font color rgba(0, 0, 0, 0.54)', () => {
+            const androidTitleFontColor = slotElementStyles.getPropertyValue('color');
+
+            // convert rgba alpha(last value) into 2 decimal only to work with safari(safari has 6 decimal places so test fails wrongly)
+            const alpha = androidTitleFontColor.replace(/^.*,(.+)\)/, '$1');
+            const alphaTwoDecimal = Number(alpha).toFixed(2);
+            const androidTitleFontColorTwoDecimalAlpha = androidTitleFontColor.replace(/[\d\.]+\)$/g, alphaTwoDecimal + ')');
+            
+            expect(androidTitleFontColorTwoDecimalAlpha).to.equal('rgba(0, 0, 0, 0.54)');
+          });
+
+          it('Should have margin margin-top of 32px and margin-bottom of 16px;', () => {
+            const androidTitleMarginTop = slotElementStyles.getPropertyValue('margin-top');
+            const androidTitleMarginBottom = slotElementStyles.getPropertyValue('margin-bottom');
+            
+            // again, two expectation for very related things to check, otherwise seperate it blocks is better
+            expect(androidTitleMarginTop).to.equal('32px');
+            expect(androidTitleMarginBottom).to.equal('16px');
+          });
+
+          it('Should have line-height of 16px', () => {
+            const androidTitleLineHeight = slotElementStyles.getPropertyValue('line-height');
+
+            expect(androidTitleLineHeight).to.equal('16px');
+          });
+
+          it('Should have font-weight of 500', () => {
+            const androidTitleFontWeight = slotElementStyles.getPropertyValue('font-weight');
+
+            expect(androidTitleFontWeight).to.equal('500');
+          });
+
+        });
+
+      });
+    </script>
+
+  </body>
+</html>
